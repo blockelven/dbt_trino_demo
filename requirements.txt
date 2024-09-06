@@ -1,7 +1,8 @@
-dagster-dbt==0.24.1
-dagster-webserver==1.8.1
+dagster-dbt==0.24.5
+dagster-webserver==1.8.5
+dagster-postgres==0.24.5
 duckdb==1.0.0
-dbt-duckdb==1.8.2
+dbt-duckdb==1.8.3
 dbt-trino==1.8.1
 # dbt-spark[PyHive]==1.8.0
 pyarrow==17.0.0
@@ -9,5 +10,6 @@ pandas==2.2.2
 plotly==5.23.0
 trino==0.329.0
 yfinance==0.2.41
+psycopg2-binary==2.9.9
 pyiceberg[sql-postgres,pyarrow]==0.7.1
 polars[pyiceberg]==1.6.0

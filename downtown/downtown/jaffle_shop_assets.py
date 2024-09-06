@@ -37,8 +37,8 @@ def raw_customers(context: AssetExecutionContext) -> None:
 
 
 @dbt_assets(manifest=jaffle_shop_project.manifest_path, dagster_dbt_translator=JaffleDbtTranslator())
-def jaffle_shop_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
-    yield from dbt.cli(["build"], context=context).stream()
+def jaffle_shop_dbt_assets(context: AssetExecutionContext, dbt_shop: DbtCliResource):
+    yield from dbt_shop.cli(["build"], context=context).stream()
 
 @asset(
     compute_kind="python",

@@ -3,3 +3,4 @@ data/*
 downtown/tmp*
 .venv
 .env
+*.egg-info

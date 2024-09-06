@@ -49,7 +49,6 @@ services:
       - POSTGRES_PASSWORD=ngods
       - POSTGRES_USER=ngods
       - POSTGRES_DB=ngods
-      - POSTGRES_MULTIPLE_DATABASES=dagster_dev
     ports:
       - '5432:5432'
     networks:
@@ -59,8 +58,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    volumes:
-      - ./config/postgres/init_dbt_trino.sh:/docker-entrypoint-initdb.d/init_dbt_trino.sh
 
   trino:
     build: trino/
@@ -75,7 +72,9 @@ services:
       - '8060:8060' # Trino
       - '8063:8063' # Trino
     networks:
-      - allinone
+      allinone:
+        aliases:
+          - trino
     depends_on:
       postgres:
         condition: service_healthy
@@ -87,44 +86,7 @@ services:
         soft: 20000
         hard: 40000
 
-  downtown:
-    build:
-      context: .
-      dockerfile: downtown/Dockerfile
 
-    environment:
-      # prepare dbt mainfest
-      - DAGSTER_IS_DEV_CLI=1
-      - TRINO_HOST=trino
-      - TRINO_PORT=8060
-      - TRINO_USER=trino
-      - TRINO_PASSWORD=
-      - ICE_NAME=warehouse
-      - ICE_CATALOG_URI=postgresql+psycopg2://ngods:ngods@postgres:5432/ngods
-      - ICE_WH_PATH=s3://warehouse
-      - ICE_S3_ENDPOINT=http://minio:9000
-      - ICE_S3_AK=minio
-      - ICE_S3_SK=minio123
-      - PYICEBERG_DOWNCAST_NS_TIMESTAMP_TO_US_ON_WRITE=True
-    ports:
-      - '3070:3070'
-    networks:
-      - allinone
-    depends_on:
-      postgres:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-
-    volumes:
-      - ./data/etl/jaffle_shop/target:/opt/dagster/etl/jaffle_shop/target
-      - ./data/etl/jaffle_shop/log:/opt/dagster/etl/jaffle_shop/log
-      - ./data/etl/jaffle_shop/dbt_modules:/opt/dagster/etl/jaffle_shop/dbt_modules
-      - ./data/etl/stock/target:/opt/dagster/etl/stock/target
-      - ./data/etl/stock/log:/opt/dagster/etl/stock/log
-      - ./data/etl/stock/dbt_modules:/opt/dagster/etl/stock/dbt_modules
-      - ./data/downtown/logs:/opt/dagster/dagster_home/logs/
-      - ./data/downtown/storage:/opt/dagster/dagster_home/storage/
 networks:
   allinone:
     driver: bridge

@@ -1,0 +1,9 @@
+storage:
+  postgres:
+    postgres_db:
+      username: ngods
+      password: ngods
+      hostname: postgres
+      db_name: dagster_dev
+      port: 5432
+

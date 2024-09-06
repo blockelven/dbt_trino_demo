@@ -36,6 +36,6 @@ def raw_yahoo_finance(context: AssetExecutionContext, iceberg: IcebergResource):
 
 
 @dbt_assets(manifest=stock_project.manifest_path, dagster_dbt_translator=StockDbtTranslator())
-def stocks_bronze_dbt_assets(context: AssetExecutionContext, dbt_bronze: DbtCliResource):
-    yield from dbt_bronze.cli(["build"], context=context).stream().fetch_row_counts().fetch_column_metadata()
+def stock_dbt_assets(context: AssetExecutionContext, dbt_stock: DbtCliResource):
+    yield from dbt_stock.cli(["build"], context=context).stream().fetch_row_counts().fetch_column_metadata()
 
