@@ -1,0 +1,7 @@
+target/
+dbt_modules/
+logs/
+**/.DS_Store
+tutorial.duckdb
+order_count_chart.html
+.user.yml

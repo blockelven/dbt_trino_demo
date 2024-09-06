@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: warehouse
+    tables:
+      - name: raw_yahoo_finance
+        meta:
+          dagster:
+            asset_key: ["raw_yahoo_finance"]
