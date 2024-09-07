@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: silver__stock_markets_with_relative_prices
+  - name: silver__monitor_stock_markets_with_relative_prices
     description: Stock market prices
 
     columns:

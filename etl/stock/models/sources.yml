@@ -7,4 +7,11 @@ sources:
       - name: raw_yahoo_finance
         meta:
           dagster:
-            asset_key: ["raw_yahoo_finance"]
+            asset_key: ["bronze_raw_yahoo_finance"]
+  - name: gold
+    database: analytics
+    tables:
+      - name: gold__monitor_stock
+        meta:
+          dagster:
+            asset_key: ["gold_monitor_stock"]

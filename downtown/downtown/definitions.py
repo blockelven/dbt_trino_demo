@@ -2,7 +2,7 @@ from dagster import Definitions, define_asset_job, EnvVar
 from dagster_dbt import DbtCliResource
 
 from .jaffle_shop_assets import jaffle_shop_dbt_assets, order_count_chart, raw_customers
-from .bronze_assets import raw_yahoo_finance, stock_dbt_assets
+from .stock_assets import bronze_raw_yahoo_finance, stock_dbt_assets, gold_monitor_stock
 from .jobs import create_scheme_job, drop_tables_job
 from .project import jaffle_shop_project, stock_project
 from .resources import IcebergResource, TrinoResource
@@ -24,18 +24,20 @@ jaffle_shop_job = define_asset_job(
 stock_job = define_asset_job(
     name="stock_job",
     selection=[
-        "raw_yahoo_finance",
+        "bronze_raw_yahoo_finance",
+        "gold_monitor_stock",
         "bronze/bronze__in_yahoo_finance",
         "silver/silver__stock_markets_with_relative_prices",
         "silver/silver__stock_markets_with_relative_prices_monthly",
         "silver/silver__apple_finance",
+        "silver/silver__monitor_stock_markets_with_relative_prices",
         "gold__stock_markets",
         "gold__stock_markets_monthly"
     ]
 )
 
 defs = Definitions(
-    assets=[raw_customers, jaffle_shop_dbt_assets, order_count_chart, raw_yahoo_finance, stock_dbt_assets],
+    assets=[raw_customers, jaffle_shop_dbt_assets, order_count_chart, bronze_raw_yahoo_finance, gold_monitor_stock, stock_dbt_assets],
     jobs=[jaffle_shop_job, stock_job, create_scheme_job, drop_tables_job],
     schedules=schedules,
     resources={
