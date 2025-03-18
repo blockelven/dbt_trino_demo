@@ -33,6 +33,8 @@ docker compose up -d
 
 ## 相关账号密码
 
+可以使用对应工具链接查看文件和数据库内容
+
 | service | host | username | password |
 | --- | --- | --- | --- |
 | postgres| localhost:5432 | ngods | ngods |
