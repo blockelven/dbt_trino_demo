@@ -34,6 +34,7 @@ docker compose up -d
 ## 相关账号密码
 
 | service | host | username | password |
+| --- | --- | --- | --- |
 | postgres| localhost:5432 | ngods | ngods |
 | trino | localhost:8060 | trino | trino |
 | MinIO | localhost:9000 | minio | minio123 |
