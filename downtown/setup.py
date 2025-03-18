@@ -10,14 +10,14 @@ setup(
         ],
     },
     install_requires=[
-        "dagster",
-        "dagster-cloud",
-        "dagster-dbt",
-        "dbt-duckdb<1.9",
+        "dagster==1.10.5",
+        "dagster-dbt==0.26.5",
+        "dbt-duckdb<1.10",
     ],
     extras_require={
         "dev": [
-            "dagster-webserver",
+            "dagster-webserver==1.10.5",
         ]
     },
 )
+

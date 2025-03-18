@@ -22,7 +22,6 @@ models:
   stock:
       materialized: table
       on_table_exists: drop
-      file_format: iceberg
       bronze:
         +database: warehouse
         +schema: bronze

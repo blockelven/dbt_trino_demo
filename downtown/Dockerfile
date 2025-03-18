@@ -40,4 +40,4 @@ WORKDIR /opt/dagster/app
 
 EXPOSE 3070
 
-ENTRYPOINT ["dagster-webserver", "-h", "0.0.0.0", "-p", "3070"]
+ENTRYPOINT ["dagster", "dev", "-h", "0.0.0.0", "-p", "3070"]
